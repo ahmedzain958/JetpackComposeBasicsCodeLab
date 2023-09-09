@@ -57,7 +57,9 @@ private fun Greeting(name: String) {
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
         Row(modifier = Modifier.padding(24.dp)) {
-            Column(modifier = Modifier.weight(1f).padding(bottom = extraPadding)) {
+            Column(modifier = Modifier
+                .weight(1f)
+                .padding(bottom = extraPadding)) {
                 Text(text = "Hello, ")
                 Text(text = name)
             }
@@ -65,10 +67,6 @@ private fun Greeting(name: String) {
                 Text(if (isExpanded.value) "Show Less" else "Show more")
             }
         }
-        /*    Column(modifier = Modifier.fillMaxWidth().padding(24.dp)) {
-                Text(text = "Hello, ")
-                Text(text = name)
-            }*/
     }
 }
 
