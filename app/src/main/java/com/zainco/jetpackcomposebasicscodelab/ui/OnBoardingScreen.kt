@@ -14,12 +14,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 
 @Composable
 fun OnBoardingScreen() {
-    var shouldOnBoarding by remember{
+    var shouldShowOnboarding by remember{
         mutableStateOf(true)
     }
     Surface (Modifier.fillMaxSize()){
@@ -27,7 +26,7 @@ fun OnBoardingScreen() {
             verticalArrangement = Arrangement.Center){
             Text(text = "Welcome to basics code")
             Button(onClick = {
-                             shouldOnBoarding = !shouldOnBoarding
+                shouldShowOnboarding = !shouldShowOnboarding
             },
                 modifier = Modifier.padding(vertical = 24.dp)) {
                 Text(text = "Continue")
