@@ -21,6 +21,7 @@ import com.zainco.jetpackcomposebasicscodelab.R
 import com.zainco.jetpackcomposebasicscodelab.ui.newsapp.Dimens.MediumPadding1
 import com.zainco.jetpackcomposebasicscodelab.ui.newsapp.Dimens.MediumPadding2
 import com.zainco.jetpackcomposebasicscodelab.ui.newsapp.Page
+import com.zainco.jetpackcomposebasicscodelab.ui.newsapp.pages
 import com.zainco.jetpackcomposebasicscodelab.ui.theme.JetpackComposeBasicsCodeLabTheme
 
 @Composable
@@ -62,11 +63,7 @@ fun OnBoardingPage(
 fun OnBoardingPagePreview() {
     JetpackComposeBasicsCodeLabTheme {
         OnBoardingPage(
-            page = Page(
-            title = "Lorem Ipsum is simply dummy",
-            description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            image = R.drawable.onboarding1
-        )
+            page = pages[0]
         )
     }
 }
