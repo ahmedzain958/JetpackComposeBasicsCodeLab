@@ -63,6 +63,11 @@ dependencies {
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
+    //Compose Foundation
+    implementation("androidx.compose.foundation:foundation:1.4.3")
+
+    //Accompanist
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.4-beta")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

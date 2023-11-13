@@ -16,9 +16,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,6 +32,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.zainco.jetpackcomposebasicscodelab.compose_fns.RememberStateOFExampleScreen
 
 class AhmedAzzActivity : ComponentActivity() {
 
@@ -36,6 +43,7 @@ class AhmedAzzActivity : ComponentActivity() {
     //Layout -> Surfaces
     //Layout -> Scaffold
 
+    var i = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -45,12 +53,14 @@ class AhmedAzzActivity : ComponentActivity() {
                  MySurface(modifier = Modifier.align(Alignment.Center))
              }
  */
-            ExampleDerivedStateOf()
-            /*LazyColumn(modifier = Modifier.padding(vertical = 4.dp), userScrollEnabled = true) {
-                items(items = List(100) { "HH$it" }) { name ->
-                    Text(text = name, modifier = Modifier.fillMaxWidth().padding(10.dp))
-                }
-            }*/
+//            RememberStateOFExampleScreen()
+            //mutableStateOF
+            var text by remember {
+                mutableStateOf("")
+            }
+            LaunchedEffect(key1 = text/*whenever this key is changed, the coroutine will be cancelled and re-launched */) {
+                println("text is $text")
+            }
         }
     }
 }
@@ -145,7 +155,7 @@ fun MyColumn() {
 @Composable
 fun MyBox(
     modifier: Modifier = Modifier,
-    contentModifier: Modifier = Modifier
+    contentModifier: Modifier = Modifier,
 ) {
 
     Box(modifier = modifier.fillMaxSize()) {
