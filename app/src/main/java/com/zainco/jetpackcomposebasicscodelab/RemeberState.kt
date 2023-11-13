@@ -12,14 +12,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import kotlin.random.Random
 
-@Preview
 @Composable
-fun stateExample() {
+fun stateExample(modifier: Modifier = Modifier) {
     val color = remember { mutableStateOf(Color.Yellow) }
     /**
      * when this box is recomposed, we don't want to reset this color value
      */
-    Box(modifier = Modifier
+    Box(modifier = modifier
         .background(color = color.value)
         .clickable {
             color.value = Color(
@@ -29,8 +28,5 @@ fun stateExample() {
                 1f
             )
         }) {
-        Button(onClick = { }) {
-
-        }
     }
 }

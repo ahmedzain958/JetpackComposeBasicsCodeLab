@@ -62,7 +62,7 @@ class AhmedAzzActivity : ComponentActivity() {
                 println("text is $text")
             }*/
 
-            stateExample()
+            stateExample(Modifier.fillMaxSize())
         }
     }
 }
