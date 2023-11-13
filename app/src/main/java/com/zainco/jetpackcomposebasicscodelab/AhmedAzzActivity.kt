@@ -55,12 +55,14 @@ class AhmedAzzActivity : ComponentActivity() {
  */
 //            RememberStateOFExampleScreen()
             //mutableStateOF
-            var text by remember {
+            /*var text by remember {
                 mutableStateOf("")
             }
-            LaunchedEffect(key1 = text/*whenever this key is changed, the coroutine will be cancelled and re-launched */) {
+            LaunchedEffect(key1 = text*//*whenever this key is changed, the coroutine will be cancelled and re-launched *//*) {
                 println("text is $text")
-            }
+            }*/
+
+            stateExample()
         }
     }
 }

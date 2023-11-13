@@ -1,7 +1,9 @@
 package com.zainco.jetpackcomposebasicscodelab.launchedeffect
 
+import androidx.compose.animation.Animatable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 
 @Composable
 fun LaunchedEffectExample(viewModel: LaunchedEffectFlowViewModel) {
@@ -15,5 +17,15 @@ fun LaunchedEffectExample(viewModel: LaunchedEffectFlowViewModel) {
                 is LaunchedEffectFlowViewModel.ScreenEvents.Navigate -> {}
             }
         }
+    }
+}
+
+@Composable
+fun LaunchedEffectExample2(counter: Int /*this is a state whenever changed a user daily calories animation cancelled and relaunched*/) {
+    val animatable = remember {
+        androidx.compose.animation.core.Animatable(0f)
+    }
+    LaunchedEffect(key1 = counter) {
+        animatable.animateTo(counter.toFloat()) /*this coroutines block cancelled then relaunched whenever the counter state changed*/
     }
 }
