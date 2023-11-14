@@ -48,12 +48,8 @@ class AhmedAzzActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            /* Box(modifier = Modifier.fillMaxSize()) {
-
-                 MySurface(modifier = Modifier.align(Alignment.Center))
-             }
- */
 //            RememberStateOFExampleScreen()
+            //////////////////////////////
             //mutableStateOF
             /*var text by remember {
                 mutableStateOf("")
@@ -61,8 +57,9 @@ class AhmedAzzActivity : ComponentActivity() {
             LaunchedEffect(key1 = text*//*whenever this key is changed, the coroutine will be cancelled and re-launched *//*) {
                 println("text is $text")
             }*/
-
-            stateExample(Modifier.fillMaxSize())
+            //////////////////////////////
+            stateClickChangesBGOFAnotherBoxExample()
+            //////////////////////////////
         }
     }
 }
