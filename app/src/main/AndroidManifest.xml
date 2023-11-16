@@ -13,32 +13,45 @@
         android:theme="@style/App.Starting.Theme"
         tools:targetApi="31">
         <activity
-            android:name=".ui.newsapp.NewsActivity"
-            android:theme="@style/App.Starting.Theme"
-            android:exported="true" >
-
-        </activity>
-        <activity
-            android:name=".MainActivity"
+            android:name=".ui.ViewPagerActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.JetpackComposeBasicsCodeLab">
+            android:label="@string/title_activity_remember_pager_state"
+            android:theme="@style/App.Starting.Theme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    <activity
+        <activity
+            android:name=".compose_fns.RememberPagerStateActivity"
+            android:exported="true"
+            android:label="@string/title_activity_remember_pager_state"
+            android:theme="@style/App.Starting.Theme">
+
+        </activity>
+        <activity
+            android:name=".ui.newsapp.NewsActivity"
+            android:exported="true"
+            android:theme="@style/App.Starting.Theme" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.JetpackComposeBasicsCodeLab">
+           <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+        <activity
             android:name=".AhmedAzzActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.JetpackComposeBasicsCodeLab">
-       <!-- <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>-->
+            <!--   -->
         </activity>
     </application>
 
