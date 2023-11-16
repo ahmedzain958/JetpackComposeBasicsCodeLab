@@ -9,7 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
-import com.zainco.jetpackcomposebasicscodelab.ui.OnBoardingScreen
+import com.zainco.jetpackcomposebasicscodelab.ui.newsapp.presentation.onboarding.OnBoardingScreen
 import com.zainco.jetpackcomposebasicscodelab.ui.theme.JetpackComposeBasicsCodeLabTheme
 
 class NewsActivity : ComponentActivity() {

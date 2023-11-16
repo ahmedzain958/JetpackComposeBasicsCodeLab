@@ -1,3 +1,4 @@
+/*
 package com.zainco.jetpackcomposebasicscodelab.ui.newsapp
 
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -102,4 +103,4 @@ fun OnBoardingScreen() {
 @Composable
 fun preview(){
     OnBoardingScreen()
-}
+}*/
