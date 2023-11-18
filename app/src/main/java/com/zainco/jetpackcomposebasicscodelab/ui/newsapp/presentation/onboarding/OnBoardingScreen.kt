@@ -3,6 +3,7 @@ package com.zainco.jetpackcomposebasicscodelab.ui.newsapp.presentation.onboardin
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -26,6 +27,9 @@ fun OnBoardingScreen() {
                     else -> listOf("", "")
                 }
             }
+        }
+        HorizontalPager(state = pagerState) {
+
         }
     }
 }
