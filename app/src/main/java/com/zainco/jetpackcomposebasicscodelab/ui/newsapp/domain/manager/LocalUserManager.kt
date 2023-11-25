@@ -1,4 +1,4 @@
-package com.zainco.jetpackcomposebasicscodelab.ui.newsapp.data.manager
+package com.zainco.jetpackcomposebasicscodelab.ui.newsapp.domain.manager
 
 import kotlinx.coroutines.flow.Flow
 
