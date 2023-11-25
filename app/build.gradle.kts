@@ -65,6 +65,7 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
     //Compose Foundation
     implementation("androidx.compose.foundation:foundation:1.4.3")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     //Accompanist
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.4-beta")
