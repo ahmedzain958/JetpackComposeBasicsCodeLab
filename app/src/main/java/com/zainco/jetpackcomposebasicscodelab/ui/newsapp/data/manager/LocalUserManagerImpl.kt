@@ -11,7 +11,6 @@ import com.loc.newsapp.util.Constants.USER_SETTINGS
 import com.zainco.jetpackcomposebasicscodelab.ui.newsapp.domain.manager.LocalUserManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.sql.DataSource
 
 class LocalUserManagerImpl(private val context: Context) : LocalUserManager {
     override suspend fun saveAppEntry() {
@@ -21,7 +20,7 @@ class LocalUserManagerImpl(private val context: Context) : LocalUserManager {
     }
 
     override fun readAppEntry(): Flow<Boolean> {
-        context.dataStore.data.map { preferences ->
+        return context.dataStore.data.map { preferences ->
             preferences[PreferenceKeys.APP_ENTRY] ?: false
         }
     }
@@ -30,6 +29,13 @@ class LocalUserManagerImpl(private val context: Context) : LocalUserManager {
 private val readOnlyProperty = preferencesDataStore(name = USER_SETTINGS)
 
 val Context.dataStore: DataStore<Preferences> by readOnlyProperty
+/*
+could be like
+val Context.dataStore: DataStore<Preferences> by {
+    preferencesDataStore(name = USER_SETTINGS)
+}
+
+ */
 
 private object PreferenceKeys {
     val APP_ENTRY = booleanPreferencesKey(Constants.APP_ENTRY)

@@ -22,4 +22,5 @@ fun main() {
     val w = Worker("carry out some")
     ProductionWorker(w).work("ProductionWorker")
     Dustman(w).work("Dustman")
+
 }
