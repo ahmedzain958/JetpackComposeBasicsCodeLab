@@ -1,5 +1,6 @@
 package com.zainco.jetpackcomposebasicscodelab.ui.newsapp.common
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -51,8 +52,11 @@ fun NewsTextButton(
 @Preview
 @Composable
 fun preview() {
-//    NewsButton(text = "News Button", {})
-    NewsTextButton(text = "News Text Button", {})
+    Column {
+        NewsButton(text = "News Button", {})
+        NewsTextButton(text = "News Text Button", {})
+    }
+
 }
 
 
