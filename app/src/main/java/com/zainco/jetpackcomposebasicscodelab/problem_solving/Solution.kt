@@ -1,10 +1,58 @@
 package com.zainco.jetpackcomposebasicscodelab.problem_solving
 
 fun main() {
-    println(" ${canJumpTillEndOfArrayUsingGreedy(intArrayOf(2,3,1,1,4))}")
-
+    //Jump GAme
+    //https://leetcode.com/problems/jump-game/description/?envType=study-plan-v2&envId=top-interview-150
+    println(
+        "canJumpTillEndOfArrayUsingGreedy ${
+            canJumpTillEndOfArrayUsingGreedy(
+                intArrayOf(
+                    2,
+                    3,
+                    1,
+                    1,
+                    4
+                )
+            )
+        }"
+    )
     //Jump GAme 2
+    //https://leetcode.com/problems/jump-game-ii/description/?envType=study-plan-v2&envId=top-interview-150
     println("Jump Game II ${jumpStepsToReachLastElement(intArrayOf(2, 3, 1, 1, 4))}")
+    //H-Index
+    //https://leetcode.com/problems/h-index/?envType=study-plan-v2&envId=top-interview-150
+    println("H-Index ${hIndex(intArrayOf(600,700,800,0))}")//6,5,3,1,0
+}
+
+/**
+ * Citations[N-h] > h (sorted asc) 0,1,3,5,6
+ * citations[4-0]>0 yes citations[4]>0 yes 6 > 0
+ * citations[4-1]>1 yes citations[3]>1 yes 5 > 1
+ * citations[4-2]>2 yes citations[2]>2 yes 3 > 2 return h = 3
+ * citations[4-3]>3 mo citations[1]>3 no 1 > 3
+ */
+fun hIndex(citations: IntArray): Int {
+    val sorted = citations.sortedArrayDescending()
+    var hIndex = 0
+    for (i in sorted.indices) {
+        if (sorted[i] >= i + 1) {
+            hIndex++
+        } else break
+    }
+    return hIndex
+}
+
+//https://www.youtube.com/watch?v=lDY3AnVOYmA
+fun hIndexUsingNMinusH(citations: IntArray): Int {
+    val sorted = citations.sortedArray()
+    val sortedSize = citations.size-1
+    var hIndex = 0
+    for (i in sorted.indices) {
+        if (sorted[sortedSize - i] >= i) {
+            hIndex++
+        } else break
+    }
+    return hIndex
 }
 
 fun jumpStepsToReachLastElement(nums: IntArray): Int {
@@ -41,10 +89,12 @@ fun canJumpTillEndOfArray(nums: IntArray): Boolean {
 
 /**
  * 3,2,1,0,4
+ * https://www.youtube.com/watch?v=Gtugy3mRV-A
  */
 fun canJumpTillEndOfArrayUsingGreedy(nums: IntArray): Boolean {
     var finalPosition = nums.size - 1
-    for (i in nums.size - 2 downTo  0) {
+    for (i in nums.size - 2 downTo 0) {
+        //can you reach the final position(flag) from position you are standing
         if (i + nums[i] >= finalPosition) {
             finalPosition = i
         }
