@@ -21,7 +21,22 @@ fun main() {
     println("Jump Game II ${jumpStepsToReachLastElement(intArrayOf(2, 3, 1, 1, 4))}")
     //H-Index
     //https://leetcode.com/problems/h-index/?envType=study-plan-v2&envId=top-interview-150
-    println("H-Index ${hIndex(intArrayOf(600,700,800,0))}")//6,5,3,1,0
+    println("H-Index ${hIndex(intArrayOf(600, 700, 800, 0))}")//6,5,3,1,0
+    //Two Sum II - Input Array Is Sorted
+    //https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/?envType=study-plan-v2&envId=top-interview-150
+    println("Two Sum II - Input Array Is Sorted ${twoSum(intArrayOf(2, 7, 11, 15), 9)}")
+}
+
+fun twoSum(numbers: IntArray, target: Int): IntArray {
+    var i = 1
+    var j = numbers.size
+    while (true) {
+        val sum = numbers[i - 1] + numbers[j - 1]
+        if (sum == target) break
+        else if (sum > target) j--
+        else i++
+    }
+    return intArrayOf(i, j)
 }
 
 /**
@@ -45,7 +60,7 @@ fun hIndex(citations: IntArray): Int {
 //https://www.youtube.com/watch?v=lDY3AnVOYmA
 fun hIndexUsingNMinusH(citations: IntArray): Int {
     val sorted = citations.sortedArray()
-    val sortedSize = citations.size-1
+    val sortedSize = citations.size - 1
     var hIndex = 0
     for (i in sorted.indices) {
         if (sorted[sortedSize - i] >= i) {
