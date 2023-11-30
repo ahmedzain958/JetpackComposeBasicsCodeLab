@@ -1,18 +1,16 @@
 package com.zainco.jetpackcomposebasicscodelab.problem_solving
 
+import java.util.LinkedList
+import kotlin.math.max
+import kotlin.math.min
+
 fun main() {
     //Jump GAme
     //https://leetcode.com/problems/jump-game/description/?envType=study-plan-v2&envId=top-interview-150
     println(
         "canJumpTillEndOfArrayUsingGreedy ${
             canJumpTillEndOfArrayUsingGreedy(
-                intArrayOf(
-                    2,
-                    3,
-                    1,
-                    1,
-                    4
-                )
+                intArrayOf(2, 3, 1, 1, 4)
             )
         }"
     )
@@ -25,6 +23,31 @@ fun main() {
     //Two Sum II - Input Array Is Sorted
     //https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/?envType=study-plan-v2&envId=top-interview-150
     println("Two Sum II - Input Array Is Sorted ${twoSum(intArrayOf(2, 7, 11, 15), 9)}")
+    //Container with most water - two pointers
+    //https://leetcode.com/problems/container-with-most-water/description/?envType=study-plan-v2&envId=top-interview-150
+    println("Container with most water - two pointers ${maxArea(intArrayOf(1, 8, 6, 2, 5, 4, 8, 3, 7)) }")
+    //3Sum
+    //https://leetcode.com/problems/container-with-most-water/description/?envType=study-plan-v2&envId=top-interview-150
+    println("3Sum - sort then two pointers ${maxArea(intArrayOf(1, 8, 6, 2, 5, 4, 8, 3, 7)) }")
+}
+
+fun threeSum(nums: IntArray): List<List<Int>> {
+    val sortedNums = nums.sortedArray()
+    val outputList = LinkedList<List<Int>>()
+}
+
+fun maxArea(height: IntArray): Int {
+    var leftIndex = 0
+    var rightIndex = height.size - 1
+    var area = 0
+    while (leftIndex < rightIndex) {
+        area = max(area, (rightIndex - leftIndex) * min(height[leftIndex], height[rightIndex]))
+        if (height[leftIndex] < height[rightIndex])
+            leftIndex++//incrementing && decrementing must be done till reaching the max area recorded
+        else
+            rightIndex--
+    }
+    return area
 }
 
 fun twoSum(numbers: IntArray, target: Int): IntArray {
