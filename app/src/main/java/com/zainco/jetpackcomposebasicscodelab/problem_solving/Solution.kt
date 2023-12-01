@@ -28,13 +28,39 @@ fun main() {
     println("Container with most water - two pointers ${maxArea(intArrayOf(1, 8, 6, 2, 5, 4, 8, 3, 7)) }")
     //3Sum
     //https://leetcode.com/problems/container-with-most-water/description/?envType=study-plan-v2&envId=top-interview-150
-    println("3Sum - sort then two pointers ${maxArea(intArrayOf(1, 8, 6, 2, 5, 4, 8, 3, 7)) }")
+    println("3Sum - sort then two pointers ${threeSum(intArrayOf(-1,0,1,2,-1,-4))}")
 }
 
 fun threeSum(nums: IntArray): List<List<Int>> {
-    val sortedNums = nums.sortedArray()
-    val outputList = LinkedList<List<Int>>()
+    val sortedNums = nums.sorted()
+    val outputList = mutableListOf<List<Int>>()
+
+    for (i in 0 until sortedNums.size) {
+        if (i == 0 || (i > 0 && sortedNums[i] != sortedNums[i - 1])) {
+            val sum = 0 - sortedNums[i]
+            var low = i + 1
+            var high = sortedNums.size - 1
+
+            while (low < high) {
+                when {
+                    sortedNums[low] + sortedNums[high] == sum -> {
+                        outputList.add(listOf(sortedNums[i], sortedNums[low], sortedNums[high]))
+
+                        while (low < high && sortedNums[low] == sortedNums[low + 1]) low++
+                        while (low < high && sortedNums[high] == sortedNums[high - 1]) high--
+
+                        low++
+                        high--
+                    }
+                    sortedNums[low] + sortedNums[high] > sum -> high--
+                    else -> low++
+                }
+            }
+        }
+    }
+    return outputList
 }
+
 
 fun maxArea(height: IntArray): Int {
     var leftIndex = 0
