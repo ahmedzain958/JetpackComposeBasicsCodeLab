@@ -1,6 +1,5 @@
 package com.zainco.jetpackcomposebasicscodelab.problem_solving
-
-import java.util.LinkedList
+import java.util.Stack
 import kotlin.math.max
 import kotlin.math.min
 
@@ -28,7 +27,96 @@ fun main() {
     println("Container with most water - two pointers ${maxArea(intArrayOf(1, 8, 6, 2, 5, 4, 8, 3, 7)) }")
     //3Sum
     //https://leetcode.com/problems/container-with-most-water/description/?envType=study-plan-v2&envId=top-interview-150
+    //https://www.youtube.com/watch?v=qJSPYnS35SE
     println("3Sum - sort then two pointers ${threeSum(intArrayOf(-1,0,1,2,-1,-4))}")
+    //SlidingWindow
+    //https://www.youtube.com/watch?v=_rWnoxus0Qg&t=325s
+    println("Sliding Window explanation ${slidingWindowMaxSum(intArrayOf(1, 4, 2, 10, 2, 3, 1, 0, 20), 4)}")
+    //sliding window Min size sub array sum
+    //https://leetcode.com/problems/minimum-size-subarray-sum/?envType=study-plan-v2&envId=top-interview-150
+    //https://www.youtube.com/watch?v=jKF9AcyBZ6E
+    println("sliding window Min size sub array sum ${minSubArrayLen(7,intArrayOf(2,3,1,2,4,3))}")
+    //sliding window Longest Substring Without Repeating Characters
+    //https://leetcode.com/problems/longest-substring-without-repeating-characters/description/?envType=study-plan-v2&envId=top-interview-150
+    println("sliding window Longest Substring Without Repeating Characters ${minSubArrayLen(7,intArrayOf(2,3,1,2,4,3))}")
+    //Longest Substring Without Repeating Characters
+    //https://leetcode.com/problems/longest-substring-without-repeating-characters/description/?envType=study-plan-v2&envId=top-interview-150
+    println("Longest Substring Without Repeating Characters ${lengthOfLongestSubstring("abcabcbb")}")
+}
+fun lengthOfLongestSubstring(s: String): Int {
+    var max = 0
+    val hashSet = LinkedHashSet<Char>()
+
+    for(c in s) {
+        while(hashSet.contains(c)) {
+            if(max < hashSet.size) {
+                max = hashSet.size
+            }
+            hashSet.remove(hashSet.first())
+        }
+        hashSet.add(c)
+    }
+
+    if(max < hashSet.size) {
+        max = hashSet.size
+    }
+
+    return max
+}
+fun minSubArrayLen(target: Int, nums: IntArray): Int {
+    var left = 0
+    var right = 0
+    var currentSum = 0
+    var minLength = Int.MAX_VALUE
+
+    while (right < nums.size) {
+        currentSum += nums[right]
+
+        while (currentSum >= target) {
+            minLength = minOf(minLength, right - left + 1)
+            currentSum -= nums[left]
+            left++
+        }
+
+        right++
+    }
+/*
+if the next line is return minLength;
+it will fail in case of
+ Input: target = 11, nums = [1,1,1,1,1,1,1,1]
+Output: 0
+ */
+    return if (minLength == Int.MAX_VALUE) 0 else minLength
+}
+/**
+ * personal demonstration: He fixed a window of k items and while looping he adds an item from the right and removes one from the left
+ */
+fun slidingWindowMaxSum(nums: IntArray, k:Int): Int {
+    var windowSum = 0
+    var maxSum = 0
+    if (k > nums.size){
+        return 0
+    }
+    for (i in 0 until k){
+        windowSum += nums[i]
+    }
+    maxSum = windowSum
+     for (i in k until nums.size){
+        windowSum += nums[i]
+        windowSum -= nums[i-k]
+         if (windowSum > maxSum){
+             maxSum = windowSum
+         }
+    }
+    /**
+     * previous loop could be conciser to be
+     * for (i in k until nums.size){
+     *         windowSum =windowSum +  nums[i]- nums[i-k]
+     *          maxSum = max(maxSum, windowSum)
+     *     }
+     */
+
+    return maxSum
 }
 
 fun threeSum(nums: IntArray): List<List<Int>> {
