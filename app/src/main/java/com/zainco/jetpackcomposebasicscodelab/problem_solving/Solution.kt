@@ -1,5 +1,4 @@
 package com.zainco.jetpackcomposebasicscodelab.problem_solving
-import java.util.Stack
 import kotlin.math.max
 import kotlin.math.min
 
@@ -41,27 +40,27 @@ fun main() {
     println("sliding window Longest Substring Without Repeating Characters ${minSubArrayLen(7,intArrayOf(2,3,1,2,4,3))}")
     //Longest Substring Without Repeating Characters
     //https://leetcode.com/problems/longest-substring-without-repeating-characters/description/?envType=study-plan-v2&envId=top-interview-150
+    //https://www.youtube.com/watch?v=3IETreEybaA
     println("Longest Substring Without Repeating Characters ${lengthOfLongestSubstring("abcabcbb")}")
 }
 fun lengthOfLongestSubstring(s: String): Int {
-    var max = 0
-    val hashSet = LinkedHashSet<Char>()
-
-    for(c in s) {
-        while(hashSet.contains(c)) {
-            if(max < hashSet.size) {
-                max = hashSet.size
-            }
-            hashSet.remove(hashSet.first())
-        }
-        hashSet.add(c)
+    var leftPointer = 0
+    var rightPointer = 0
+    var lengthOfLongestSubstring = 0
+    val hashSet = LinkedHashSet<Char>()//holds up unique characters
+    //the one that is expanding the window is gonna get to the end before the one that sits in the beginning
+    while (rightPointer < s.length) {
+       if (hashSet.contains(s[rightPointer])){
+           hashSet.remove(s[leftPointer])
+           leftPointer++
+       }else{
+           hashSet.add(s[rightPointer])//add the current pointer
+           rightPointer++//expand the window
+           //we just want to keep the maximum length throughout the whole thing
+           lengthOfLongestSubstring = max(lengthOfLongestSubstring, hashSet.size/*incrementing lengthOfLongestSubstring++ isn't right because we already add new item to the hashset*/)
+       }
     }
-
-    if(max < hashSet.size) {
-        max = hashSet.size
-    }
-
-    return max
+    return lengthOfLongestSubstring
 }
 fun minSubArrayLen(target: Int, nums: IntArray): Int {
     var left = 0
@@ -264,3 +263,14 @@ fun maxProfit(prices: IntArray): Int {
     return profit
 }
 
+fun main2() {
+    val hashSet = LinkedHashSet<Char>()
+    hashSet.add('a')
+    hashSet.add('b')
+    hashSet.add('c')
+    hashSet.remove(hashSet.first())
+    hashSet.remove("abc"[2])
+    hashSet.forEach {
+        println(it)
+    }
+}
