@@ -2,6 +2,7 @@ package com.zainco.jetpackcomposebasicscodelab.problem_solving
 import kotlin.math.max
 import kotlin.math.min
 
+
 fun main() {
     //Jump GAme
     //https://leetcode.com/problems/jump-game/description/?envType=study-plan-v2&envId=top-interview-150
@@ -42,6 +43,77 @@ fun main() {
     //https://leetcode.com/problems/longest-substring-without-repeating-characters/description/?envType=study-plan-v2&envId=top-interview-150
     //https://www.youtube.com/watch?v=3IETreEybaA
     println("Longest Substring Without Repeating Characters ${lengthOfLongestSubstring("abcabcbb")}")
+//    sliding window - Minimum Window Substring
+//    https://leetcode.com/problems/minimum-window-substring/description/?envType=study-plan-v2&envId=top-interview-150
+//    https://www.youtube.com/watch?v=eS6PZLjoaq8
+    println("Longest Substring Without Repeating Characters ${minWindow("ADOBECODEBANC", "ABC")}")
+}
+
+fun minWindow(searchString: String, t: String): String {
+    // Creating Map for storing the frequency
+    val requiredCharactersMap = buildMappingOfCharactersToOccurrences(t)
+    val windowCharacterMapping: MutableMap<Char, Int> = HashMap()
+    var left = 0
+    var right = 0
+    val totalCharFrequenciesToMatch = requiredCharactersMap.size
+    var charFrequenciesInWindowThatMatch = 0
+
+    // This will store the minimum length of valid substring
+    var minWindowLengthSeenSoFar = Int.MAX_VALUE
+
+    // It will store the actual substring
+    var minWindow = ""
+
+    // Here we calculate the ans using 2 pointer's approach
+    while (right < searchString.length) {
+        val characterAtRightPointer = searchString[right]
+        addCharacterToHashtableMapping(windowCharacterMapping, characterAtRightPointer)
+        val rightCharIsARequirement = requiredCharactersMap.containsKey(characterAtRightPointer)
+        if (rightCharIsARequirement) {
+            val requirementForCharacterMet =
+                requiredCharactersMap[characterAtRightPointer] == windowCharacterMapping[characterAtRightPointer]
+            if (requirementForCharacterMet) {
+                charFrequenciesInWindowThatMatch++
+            }
+        }
+        while (charFrequenciesInWindowThatMatch == totalCharFrequenciesToMatch && left <= right) {
+            val characterAtLeftPointer = searchString[left]
+            val windowSize = right - left + 1
+            if (windowSize < minWindowLengthSeenSoFar) {
+                minWindowLengthSeenSoFar = windowSize
+                minWindow = searchString.substring(left, right + 1)
+            }
+            windowCharacterMapping[characterAtLeftPointer] =
+                windowCharacterMapping[characterAtLeftPointer]!! - 1
+            val leftCharIsARequirement = requiredCharactersMap.containsKey(characterAtLeftPointer)
+            if (leftCharIsARequirement) {
+                val characterFailsRequirement =
+                    windowCharacterMapping[characterAtLeftPointer]!! < requiredCharactersMap[characterAtLeftPointer]!!
+                if (characterFailsRequirement) {
+                    charFrequenciesInWindowThatMatch--
+                }
+            }
+            left++
+        }
+        right++
+    }
+    return minWindow
+}
+
+// Helper function for computing the character's frequency of a string
+private fun buildMappingOfCharactersToOccurrences(s: String): Map<Char, Int> {
+    val map: MutableMap<Char, Int> = HashMap()
+    for (i in s.indices) {
+        val occurrencesOfCharacter = map.getOrDefault(s[i], 0)
+        map[s[i]] = occurrencesOfCharacter + 1
+    }
+    return map
+}
+
+// Helper function to insert a character in the map
+private fun addCharacterToHashtableMapping(map: MutableMap<Char, Int>, c: Char) {
+    val occurrences = map.getOrDefault(c, 0)
+    map[c] = occurrences + 1
 }
 fun lengthOfLongestSubstring(s: String): Int {
     var leftPointer = 0
