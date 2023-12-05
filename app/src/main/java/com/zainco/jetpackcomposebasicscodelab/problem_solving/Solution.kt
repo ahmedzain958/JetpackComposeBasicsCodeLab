@@ -38,11 +38,8 @@ fun main() {
     println("sliding window Min size sub array sum ${minSubArrayLen(7,intArrayOf(2,3,1,2,4,3))}")
     //sliding window Longest Substring Without Repeating Characters
     //https://leetcode.com/problems/longest-substring-without-repeating-characters/description/?envType=study-plan-v2&envId=top-interview-150
-    println("sliding window Longest Substring Without Repeating Characters ${minSubArrayLen(7,intArrayOf(2,3,1,2,4,3))}")
-    //Longest Substring Without Repeating Characters
-    //https://leetcode.com/problems/longest-substring-without-repeating-characters/description/?envType=study-plan-v2&envId=top-interview-150
     //https://www.youtube.com/watch?v=3IETreEybaA
-    println("Longest Substring Without Repeating Characters ${lengthOfLongestSubstring("abcabcbb")}")
+    println("Longest Substring Without Repeating Characters ${lengthOfLongestSubstringWithoutRepeatingCharacters("abcabcbb")}")
 //    sliding window - Minimum Window Substring
 //    https://leetcode.com/problems/minimum-window-substring/description/?envType=study-plan-v2&envId=top-interview-150
 //    https://www.youtube.com/watch?v=eS6PZLjoaq8
@@ -51,15 +48,28 @@ fun main() {
 
 fun minWindow(searchString: String, t: String): String {
 
-    var shortestWindow = ""
+    var minWindow = ""
     var leftPointer = 0
     var rightPointer = 0
     val targetedMapOfTs = HashMap<Char, Int>()
+    val windowMapIncludingTs = HashMap<Char, Int>()
     t.forEach {character ->
-        targetedMapOfTs[character] = targetedMapOfTs.getOrDefault(character,0) +1
+        targetedMapOfTs[character] = targetedMapOfTs.getOrDefault(character,0) + 1
     }
+    while (rightPointer < searchString.length){
+        val currentSearchStringCharacter = searchString[rightPointer]
+        minWindow += currentSearchStringCharacter
+        //add all string elements to the windowMapIncludingTs
+        windowMapIncludingTs[currentSearchStringCharacter] = windowMapIncludingTs.getOrDefault(currentSearchStringCharacter,0) + 1
+        //currentSum >= target
+        while (minWindow.length >=  t.length && leftPointer <= rightPointer ) {
+            leftPointer++
+        }
+        rightPointer++
+    }
+
     // Creating Map for storing the frequency
-    val requiredCharactersMap = buildMappingOfCharactersToOccurrences(t)
+    /*val requiredCharactersMap = buildMappingOfCharactersToOccurrences(t)
     val windowCharacterMapping: MutableMap<Char, Int> = HashMap()
     var left = 0
     var right = 0
@@ -76,13 +86,9 @@ fun minWindow(searchString: String, t: String): String {
     while (right < searchString.length) {
         val characterAtRightPointer = searchString[right]
         addCharacterToHashtableMapping(windowCharacterMapping, characterAtRightPointer)
-        val rightCharIsARequirement = requiredCharactersMap.containsKey(characterAtRightPointer)
-        if (rightCharIsARequirement) {
-            val requirementForCharacterMet =
-                requiredCharactersMap[characterAtRightPointer] == windowCharacterMapping[characterAtRightPointer]
-            if (requirementForCharacterMet) {
-                charFrequenciesInWindowThatMatch++
-            }
+        if (requiredCharactersMap.containsKey(characterAtRightPointer) &
+        & requiredCharactersMap[characterAtRightPointer] == windowCharacterMapping[characterAtRightPointer]) {
+            charFrequenciesInWindowThatMatch++
         }
         while (charFrequenciesInWindowThatMatch == totalCharFrequenciesToMatch && left <= right) {
             val characterAtLeftPointer = searchString[left]
@@ -104,7 +110,7 @@ fun minWindow(searchString: String, t: String): String {
             left++
         }
         right++
-    }
+    }*/
     return minWindow
 }
 
@@ -123,7 +129,7 @@ private fun addCharacterToHashtableMapping(map: MutableMap<Char, Int>, c: Char) 
     val occurrences = map.getOrDefault(c, 0)
     map[c] = occurrences + 1
 }
-fun lengthOfLongestSubstring(s: String): Int {
+fun lengthOfLongestSubstringWithoutRepeatingCharacters(s: String): Int {
     var leftPointer = 0
     var rightPointer = 0
     var lengthOfLongestSubstring = 0
