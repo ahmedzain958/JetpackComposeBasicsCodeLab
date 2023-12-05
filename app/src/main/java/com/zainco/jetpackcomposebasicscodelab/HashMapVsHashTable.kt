@@ -83,4 +83,21 @@ object HashMapGetOrDefaultExample {
     }
 }
 
+fun main() {
+    println(buildMappingOfCharactersToOccurrences("Ahmed"))
+    val targetedMapOfTs = HashMap<Char, Int>()
+    "Ahmed".forEach {character ->
+        targetedMapOfTs[character] = targetedMapOfTs.getOrDefault(character,0) +1
+    }
+    println(targetedMapOfTs)
+}
+private fun buildMappingOfCharactersToOccurrences(s: String): Map<Char, Int> {
+    val map: MutableMap<Char, Int> = HashMap()
+    for (i in s.indices) {
+        val occurrencesOfCharacter = map.getOrDefault(s[i], 0)
+        map[s[i]] = occurrencesOfCharacter + 1
+    }
+    return map
+}
+
 

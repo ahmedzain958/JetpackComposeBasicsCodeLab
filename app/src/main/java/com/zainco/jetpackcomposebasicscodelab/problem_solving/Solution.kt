@@ -50,6 +50,14 @@ fun main() {
 }
 
 fun minWindow(searchString: String, t: String): String {
+
+    var shortestWindow = ""
+    var leftPointer = 0
+    var rightPointer = 0
+    val targetedMapOfTs = HashMap<Char, Int>()
+    t.forEach {character ->
+        targetedMapOfTs[character] = targetedMapOfTs.getOrDefault(character,0) +1
+    }
     // Creating Map for storing the frequency
     val requiredCharactersMap = buildMappingOfCharactersToOccurrences(t)
     val windowCharacterMapping: MutableMap<Char, Int> = HashMap()
