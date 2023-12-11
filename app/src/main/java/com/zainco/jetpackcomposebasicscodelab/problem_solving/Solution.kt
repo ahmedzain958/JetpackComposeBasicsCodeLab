@@ -48,7 +48,7 @@ fun main() {
 
 fun minWindow(searchString: String, t: String): String {
 
-    var minWindow = ""
+    /*var minWindow = ""
     var leftPointer = 0
     var rightPointer = 0
     val targetedMapOfTs = HashMap<Char, Int>()
@@ -66,10 +66,10 @@ fun minWindow(searchString: String, t: String): String {
             leftPointer++
         }
         rightPointer++
-    }
+    }*/
 
     // Creating Map for storing the frequency
-    /*val requiredCharactersMap = buildMappingOfCharactersToOccurrences(t)
+    val requiredCharactersMap = buildMappingOfCharactersToOccurrences(t)
     val windowCharacterMapping: MutableMap<Char, Int> = HashMap()
     var left = 0
     var right = 0
@@ -83,11 +83,11 @@ fun minWindow(searchString: String, t: String): String {
     var minWindow = ""
 
     // Here we calculate the ans using 2 pointer's approach
-    while (right < searchString.length) {
+    while (right < searchString.length) {//expanding my window as far as possible until I satisfy these requirements ex A=1 B=1 C=1
         val characterAtRightPointer = searchString[right]
         addCharacterToHashtableMapping(windowCharacterMapping, characterAtRightPointer)
-        if (requiredCharactersMap.containsKey(characterAtRightPointer) &
-        & requiredCharactersMap[characterAtRightPointer] == windowCharacterMapping[characterAtRightPointer]) {
+        if (requiredCharactersMap.containsKey(characterAtRightPointer) && requiredCharactersMap[characterAtRightPointer] == windowCharacterMapping[characterAtRightPointer]) {
+            //whenever found an existing element of window inside the required ones
             charFrequenciesInWindowThatMatch++
         }
         while (charFrequenciesInWindowThatMatch == totalCharFrequenciesToMatch && left <= right) {
@@ -110,7 +110,7 @@ fun minWindow(searchString: String, t: String): String {
             left++
         }
         right++
-    }*/
+    }
     return minWindow
 }
 
