@@ -1,0 +1,27 @@
+Structured Data:
+
+Definition: Structured data refers to data that is organized in a predefined manner,
+usually with a clear and well-defined schema.
+
+Structured Data Example:
+| ID | Name     | Age | City       |
+|----|----------|-----|------------|
+| 1  | John     | 30  | New York   |
+| 2  | Alice    | 25  | San Francisco |
+| 3  | Bob      | 35  | Chicago    |
+
+
+
+Unstructured Data:
+
+Definition: Unstructured data refers to data that does not have a predefined data model or organizational structure
+
+Unstructured Data Example:
+Text Document:
+"The quick brown fox jumps over the lazy dog."
+
+Image File:
+[Binary representation of an image]
+
+Video File:
+[Binary representation of a video file]
