@@ -40,78 +40,24 @@ fun main() {
     //https://leetcode.com/problems/longest-substring-without-repeating-characters/description/?envType=study-plan-v2&envId=top-interview-150
     //https://www.youtube.com/watch?v=3IETreEybaA
     println("Longest Substring Without Repeating Characters ${lengthOfLongestSubstringWithoutRepeatingCharacters("abcabcbb")}")
-//    sliding window - Minimum Window Substring
-//    https://leetcode.com/problems/minimum-window-substring/description/?envType=study-plan-v2&envId=top-interview-150
-//    https://www.youtube.com/watch?v=eS6PZLjoaq8
-    println("Longest Substring Without Repeating Characters ${minWindow("ADOBECODEBANC", "ABC")}")
+    //    sliding window - Minimum Window Substring
+    //    https://leetcode.com/problems/minimum-window-substring/description/?envType=study-plan-v2&envId=top-interview-150
+    //    https://www.youtube.com/watch?v=eS6PZLjoaq8
+    //Input: s = "ADOBECODEBANC", t = "ABC"
+    //Output: "BANC"
+    println("sliding window - Minimum Window Substring ${minWindow("ADOBECODEBANC", "ABC")}")
 }
-
+//
 fun minWindow(searchString: String, t: String): String {
-
-    /*var minWindow = ""
-    var leftPointer = 0
-    var rightPointer = 0
-    val targetedMapOfTs = HashMap<Char, Int>()
-    val windowMapIncludingTs = HashMap<Char, Int>()
-    t.forEach {character ->
-        targetedMapOfTs[character] = targetedMapOfTs.getOrDefault(character,0) + 1
-    }
-    while (rightPointer < searchString.length){
-        val currentSearchStringCharacter = searchString[rightPointer]
-        minWindow += currentSearchStringCharacter
-        //add all string elements to the windowMapIncludingTs
-        windowMapIncludingTs[currentSearchStringCharacter] = windowMapIncludingTs.getOrDefault(currentSearchStringCharacter,0) + 1
-        //currentSum >= target
-        while (minWindow.length >=  t.length && leftPointer <= rightPointer ) {
-            leftPointer++
-        }
-        rightPointer++
-    }*/
-
-    // Creating Map for storing the frequency
-    val requiredCharactersMap = buildMappingOfCharactersToOccurrences(t)
-    val windowCharacterMapping: MutableMap<Char, Int> = HashMap()
     var left = 0
     var right = 0
-    val totalCharFrequenciesToMatch = requiredCharactersMap.size
-    var charFrequenciesInWindowThatMatch = 0
+    val requiredHashMap = buildMappingOfCharactersToOccurrences(t)
+    val searchStringHashMap  = hashMapOf<Char, Int>()
+    while (left < right){
 
-    // This will store the minimum length of valid substring
-    var minWindowLengthSeenSoFar = Int.MAX_VALUE
-
-    // It will store the actual substring
-    var minWindow = ""
-
-    // Here we calculate the ans using 2 pointer's approach
-    while (right < searchString.length) {//expanding my window as far as possible until I satisfy these requirements ex A=1 B=1 C=1
-        val characterAtRightPointer = searchString[right]
-        addCharacterToHashtableMapping(windowCharacterMapping, characterAtRightPointer)
-        if (requiredCharactersMap.containsKey(characterAtRightPointer) && requiredCharactersMap[characterAtRightPointer] == windowCharacterMapping[characterAtRightPointer]) {
-            //whenever found an existing element of window inside the required ones
-            charFrequenciesInWindowThatMatch++
-        }
-        while (charFrequenciesInWindowThatMatch == totalCharFrequenciesToMatch && left <= right) {
-            val characterAtLeftPointer = searchString[left]
-            val windowSize = right - left + 1
-            if (windowSize < minWindowLengthSeenSoFar) {
-                minWindowLengthSeenSoFar = windowSize
-                minWindow = searchString.substring(left, right + 1)
-            }
-            windowCharacterMapping[characterAtLeftPointer] =
-                windowCharacterMapping[characterAtLeftPointer]!! - 1
-            val leftCharIsARequirement = requiredCharactersMap.containsKey(characterAtLeftPointer)
-            if (leftCharIsARequirement) {
-                val characterFailsRequirement =
-                    windowCharacterMapping[characterAtLeftPointer]!! < requiredCharactersMap[characterAtLeftPointer]!!
-                if (characterFailsRequirement) {
-                    charFrequenciesInWindowThatMatch--
-                }
-            }
-            left++
-        }
         right++
     }
-    return minWindow
+    return ""
 }
 
 // Helper function for computing the character's frequency of a string
