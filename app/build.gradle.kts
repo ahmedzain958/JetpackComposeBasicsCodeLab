@@ -18,6 +18,9 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        // fields/constants declared here will be used all over the application, but declared inside release/debug/inside the flavor will be used
+        // inside its own build type/flavor only
+        buildConfigField("Boolean", "IS_COM", "false")
     }
 
     buildTypes {
@@ -28,7 +31,15 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug/*build type*/ {
+            // a config parameter could be compiled in the config
+        }
     }
+    /*
+    as we know that jvm compiles java classes to bytecode, so if the jvm target is 1.8, the bytcode compiled will be found 1.8 and less not more
+    for ex: lamda expression will be found within the bytecode because ot is presenting in java 8
+    Note: jvm version choice should be compatible with the min sdk
+     */
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -48,7 +59,7 @@ android {
         }
     }
 }
-
+//dependencies existing in dependencyResolutionManagement existing in settings.gradle
 dependencies {
 
     implementation("androidx.core:core-ktx:1.9.0")
