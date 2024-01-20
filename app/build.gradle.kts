@@ -20,7 +20,6 @@ android {
         }
         // fields/constants declared here will be used all over the application, but declared inside release/debug/inside the flavor will be used
         // inside its own build type/flavor only
-        buildConfigField("Boolean", "IS_COM", "false")
     }
 
     buildTypes {
@@ -59,6 +58,7 @@ android {
         }
     }
 }
+
 //dependencies existing in dependencyResolutionManagement existing in settings.gradle
 dependencies {
 
@@ -89,4 +89,30 @@ dependencies {
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+}
+
+///////////////////////////////////////
+// gradle tasks: displays a list of available tasks,
+// project build files(build.gradle and settings.gradle) are scanned by gradle when I ran this command
+// gradle build: task assembles and build the project
+//needed example of failing apk generating iff the local.properties  doesn't contain the keystore
+//throws GradleException if the keystore parameter is missing inside the local.properties
+/**
+ * // Add a custom task to check for the keystore file
+ *         task checkKeystoreFile {
+ *             doLast {
+ *                 Properties properties = new Properties()
+ *                 properties.load(project.rootProject.file('local.properties').newDataInputStream())
+ *
+ *                 if (properties['keystoreFile'] == null || !file(properties['keystoreFile']).exists()) {
+ *                     throw new GradleException("Keystore file is missing or not specified in local.properties.")
+ *                 }
+ *             }
+ *         }
+ *
+ *         // Hook the custom task to execute before the `assemble` task
+ *         preBuild.dependsOn checkKeystoreFile
+ */
+apply {
+    from("$rootDir/scripts/move-apk.gradle")
 }

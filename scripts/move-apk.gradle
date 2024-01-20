@@ -1,0 +1,7 @@
+def moveApkDef = tasks.register('moveApk', Copy){
+    from("${project.buildDir}/outputs/apk")
+    into("my-apk")
+}
+
+tasks."assemble".finalizedBy(moveApkDef)
+
